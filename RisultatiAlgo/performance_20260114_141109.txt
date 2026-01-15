@@ -1,0 +1,31 @@
+=== REPORT PERFORMANCE ===
+
+Parola di lunghezza 200:
+Tempo DP: 68 ms (0.068 s)
+Tempo Greedy: 2 ms (0.002 s)
+--------------------------------------------------
+
+Parola di lunghezza 400:
+Tempo DP: 350 ms (0.35 s)
+Tempo Greedy: 0 ms (0.0 s)
+--------------------------------------------------
+
+Parola di lunghezza 800:
+Tempo DP: 2576 ms (2.576 s)
+Tempo Greedy: 23 ms (0.023 s)
+--------------------------------------------------
+
+Parola di lunghezza 1600:
+Tempo DP: 39403 ms (39.403 s)
+Tempo Greedy: 83 ms (0.083 s)
+--------------------------------------------------
+
+Parola di lunghezza 1000:
+Tempo DP: 6645 ms (6.645 s)
+Tempo Greedy: 35 ms (0.035 s)
+--------------------------------------------------
+
+Parola di lunghezza 2000:
+Tempo DP: 90221 ms (90.221 s)
+Tempo Greedy: 256 ms (0.256 s)
+--------------------------------------------------

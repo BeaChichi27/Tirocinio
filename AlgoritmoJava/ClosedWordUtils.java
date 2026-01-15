@@ -5,7 +5,12 @@ public class ClosedWordUtils {
     public static String generateRandomWord(int alphaSize, int minLen, int maxLen) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
-        int length = random.nextInt(maxLen - minLen + 1) + minLen;
+        int length=0;
+        if(maxLen-minLen+1<=0){
+            length=minLen;
+        }else{
+        length = random.nextInt(maxLen - minLen + 1) + minLen;
+        }
         char[] fullAlphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         
         for (int i = 0; i < length; i++) {

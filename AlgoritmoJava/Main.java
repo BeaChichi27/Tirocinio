@@ -109,6 +109,139 @@ public class Main {
         }
     }
 
+    public static void performanceMode(){
+        System.out.println("\n=== PERFORMANCE MODE ===");
+        
+        String directoryPath = "/mnt/c/Users/beatr/OneDrive/Desktop/Tirocinio/RisultatiAlgo";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        File file = new File(directoryPath, "performance_" + timestamp + ".txt");
+        new File(directoryPath).mkdirs();
+
+        int[] lengths = {200, 400, 800, 1600, 1000, 2000};
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            writer.println("=== REPORT PERFORMANCE ===");
+            System.out.println("Log: " + file.getAbsolutePath());
+
+            for (int size : lengths) {
+                
+                String word = ClosedWordUtils.generateRandomWord(2, size, size); 
+
+                
+                long startTimeDP = System.currentTimeMillis();
+                Factorizer.minimalFactorizationDP(word);
+                long endTimeDP = System.currentTimeMillis();
+                long durationDP = endTimeDP - startTimeDP;
+
+                
+                long startTimeGreedy = System.currentTimeMillis();
+                Factorizer.greedyFactorization(word);
+                long endTimeGreedy = System.currentTimeMillis();
+                long durationGreedy = endTimeGreedy - startTimeGreedy;
+
+                
+                String report = "\nParola di lunghezza " + size + ":\n" +
+                                "Tempo DP: " + durationDP + " ms (" + (durationDP/1000.0) + " s)\n" +
+                                "Tempo Greedy: " + durationGreedy + " ms (" + (durationGreedy/1000.0) + " s)\n" +
+                                "--------------------------------------------------";
+                
+                System.out.println(report);
+                writer.println(report);
+                writer.flush();
+            }
+
+            System.out.println("\n=== FINE PERFORMANCE TEST ===");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void generatorMode() {
+        System.out.println("\n=== GENERATOR MODE & REPORT ===");
+        
+        String directoryPath = "/mnt/c/Users/beatr/OneDrive/Desktop/Tirocinio/RisultatiAlgo";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        File file = new File(directoryPath, "report_generatori_" + timestamp + ".txt");
+        new File(directoryPath).mkdirs();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            writer.println("=== REPORT ANALISI GENERATORI ===");
+            writer.println("Data: " + LocalDateTime.now());
+            System.out.println("Log salvato in: " + file.getAbsolutePath());
+
+            String headerFib = "\n=== ANALISI PAROLE DI FIBONACCI ===";
+            System.out.println(headerFib);
+            writer.println(headerFib);
+
+            String tableHeader = String.format("%-5s | %-15s | %-10s | %-10s | %-10s | %-10s | %-15s", 
+                 "n", "Lunghezza", "DP Size", "Greedy", "Time(ms)", "Diff", "Check");
+            System.out.println(tableHeader);
+            writer.println(tableHeader);
+
+            String separator = "-----------------------------------------------------------------------------------------";
+            System.out.println(separator);
+            writer.println(separator);
+
+            for (int i = 3; i <= 17; i++) {
+                String fibWord = Generatori.fibonacciWord(i);
+                
+                long startT = System.currentTimeMillis();
+                FactorizationResult dp = Factorizer.minimalFactorizationDP(fibWord);
+                FactorizationResult greedy = Factorizer.greedyFactorization(fibWord);
+                long endT = System.currentTimeMillis();
+
+                int diff = greedy.totalFactors - dp.totalFactors;
+                String check = (diff > 0) ? "!!! CONTROESEMPIO" : "OK";
+
+                String row = String.format("%-5d | %-15d | %-10d | %-10d | %-10d | %-10d | %-15s", 
+                    i, fibWord.length(), dp.totalFactors, greedy.totalFactors, (endT - startT), diff, check);
+                
+                System.out.println(row);
+                writer.println(row);
+                writer.flush();
+            }
+            System.out.println(separator);
+            writer.println(separator);
+
+            String headerTM = "\n\n=== ANALISI PAROLE DI THUE-MORSE ===";
+            System.out.println(headerTM);
+            writer.println(headerTM);
+            
+            System.out.println(tableHeader);
+            writer.println(tableHeader);
+            
+            System.out.println(separator);
+            writer.println(separator);
+
+            for (int i = 1; i <= 11; i++) { 
+                String thueWord = Generatori.thueMorseWord(i);
+                
+                long startT = System.currentTimeMillis();
+                FactorizationResult dp = Factorizer.minimalFactorizationDP(thueWord);
+                FactorizationResult greedy = Factorizer.greedyFactorization(thueWord);
+                long endT = System.currentTimeMillis();
+
+                int diff = greedy.totalFactors - dp.totalFactors;
+                String check = (diff > 0) ? "!!! CONTROESEMPIO" : "OK";
+
+                String row = String.format("%-5d | %-15d | %-10d | %-10d | %-10d | %-10d | %-15s", 
+                    i, thueWord.length(), dp.totalFactors, greedy.totalFactors, (endT - startT), diff, check);
+
+                System.out.println(row);
+                writer.println(row);
+                writer.flush();
+            }
+            System.out.println(separator);
+            writer.println(separator);
+            
+            System.out.println("\nAnalisi completata.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void runManualMode(Scanner scanner) {
         while (true) {
             System.out.print("\nInserisci parola (scrivi 'esci' per uscire): ");
@@ -141,9 +274,11 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1 - Manuale | 2 - Test Auto");
+        System.out.println("1 - Manuale | 2 - Test Auto | 3 - Performance | 4 - Generatori");
         String choice = scanner.nextLine();
         if (choice.equals("2")) runTestMode();
+        else if (choice.equals("3")) performanceMode();
+        else if (choice.equals("4")) generatorMode();
         else runManualMode(scanner);
     }
 }

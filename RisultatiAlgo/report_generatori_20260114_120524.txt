@@ -1,0 +1,38 @@
+=== REPORT ANALISI GENERATORI ===
+Data: 2026-01-14T12:05:24.738175244
+
+=== ANALISI PAROLE DI FIBONACCI ===
+n     | Lunghezza       | DP Size    | Greedy     | Time(ms)   | Diff       | Check          
+-----------------------------------------------------------------------------------------
+3     | 3               | 1          | 1          | 1          | 0          | OK             
+4     | 5               | 1          | 1          | 0          | 0          | OK             
+5     | 8               | 2          | 3          | 1          | 1          | !!! CONTROESEMPIO
+6     | 13              | 2          | 3          | 0          | 1          | !!! CONTROESEMPIO
+7     | 21              | 2          | 3          | 1          | 1          | !!! CONTROESEMPIO
+8     | 34              | 2          | 3          | 4          | 1          | !!! CONTROESEMPIO
+9     | 55              | 2          | 3          | 7          | 1          | !!! CONTROESEMPIO
+10    | 89              | 2          | 3          | 20         | 1          | !!! CONTROESEMPIO
+11    | 144             | 2          | 3          | 16         | 1          | !!! CONTROESEMPIO
+12    | 233             | 2          | 3          | 54         | 1          | !!! CONTROESEMPIO
+13    | 377             | 2          | 3          | 188        | 1          | !!! CONTROESEMPIO
+14    | 610             | 2          | 3          | 906        | 1          | !!! CONTROESEMPIO
+15    | 987             | 2          | 3          | 3954       | 1          | !!! CONTROESEMPIO
+16    | 1597            | 2          | 3          | 23856      | 1          | !!! CONTROESEMPIO
+17    | 2584            | 2          | 3          | 144750     | 1          | !!! CONTROESEMPIO
+-----------------------------------------------------------------------------------------
+
+
+=== ANALISI PAROLE DI THUE-MORSE ===
+n     | Lunghezza       | DP Size    | Greedy     | Time(ms)   | Diff       | Check          
+-----------------------------------------------------------------------------------------
+1     | 2               | 2          | 2          | 0          | 0          | OK             
+2     | 4               | 1          | 1          | 1          | 0          | OK             
+3     | 8               | 2          | 3          | 0          | 1          | !!! CONTROESEMPIO
+4     | 16              | 3          | 4          | 1          | 1          | !!! CONTROESEMPIO
+5     | 32              | 3          | 3          | 0          | 0          | OK             
+6     | 64              | 3          | 5          | 0          | 2          | !!! CONTROESEMPIO
+7     | 128             | 3          | 6          | 5          | 3          | !!! CONTROESEMPIO
+8     | 256             | 3          | 5          | 53         | 2          | !!! CONTROESEMPIO
+9     | 512             | 3          | 7          | 439        | 4          | !!! CONTROESEMPIO
+10    | 1024            | 3          | 8          | 5664       | 5          | !!! CONTROESEMPIO
+11    | 2048            | 3          | 7          | 81145      | 4          | !!! CONTROESEMPIO
