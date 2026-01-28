@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("==================================================");
-        System.out.println("   BENCHMARK OTTIMIZZAZIONE (KMP + Zero-Allocation)");
+        System.out.println("   BENCHMARK OTTIMIZZAZIONE");
         System.out.println("==================================================\n");
 
         // 1. TEST FIBONACCI
