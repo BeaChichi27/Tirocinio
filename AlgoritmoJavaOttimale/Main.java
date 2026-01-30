@@ -7,7 +7,7 @@ public class Main {
         System.out.println("   BENCHMARK COMPARATIVO: Factorizer vs FactorizerOpt");
         System.out.println("===============================================================\n");
         
-         runSingleTest("Random 10.000 char (Alpha=2)", () -> Generatori.generateRandomWord(2, 10000, 10000));
+        runSingleTest("Random 10.000 char (Alpha=2)", () -> Generatori.generateRandomWord(2, 10000, 10000));
         runSingleTest("Random 20.000 char (Alpha=2)", () -> Generatori.generateRandomWord(2, 20000, 20000));
         runSingleTest("Random 50.000 char (Alpha=2)", () -> Generatori.generateRandomWord(2, 50000, 50000));
 

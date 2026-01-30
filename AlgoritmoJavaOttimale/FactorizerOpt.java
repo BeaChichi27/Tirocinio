@@ -79,7 +79,10 @@ public class FactorizerOpt {
         return new FactorizationResult(dp[n], solution, ways[n], new ArrayList<>());
     }
 
-    
+    /*
+    Questo metodo aggiorna la tabella DP, il conteggio dei modi e il genitore
+    per una data sottostringa in modo efficiente.
+    */
     private static void updateDP(int[] dp, long[] ways, int[] parent, int start, int target, int newCost) {
         if (newCost < dp[target]) {
             dp[target] = newCost;
