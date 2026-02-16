@@ -4,60 +4,32 @@
 
 # Visualizza le lunghezze chiuse per n < 100
 eval closedLengthsFib "?msd_fib n < 100 & $isClosed_Fib(n)":
-```
 
 ### 1.2 Parole di Thue-Morse
 
 # Visualizza le lunghezze chiuse per n < 100
 eval closedLengthsTM "?msd_2 n < 100 & $isClosed_TM(n)":
-```
-
----
 
 ## 2. PREDICATI DI FATTORIZZAZIONE
 
 ### 2.1 Fattorizzazione in 2 Parti - Fibonacci
 
 # Definizione: esiste k tale che [0..k-1] e [k..n-1] sono entrambe chiuse?
-def twoFactorsFib "?msd_fib Ek (k >= 1 & k < n & $isClosed_Fib(k) & $isClosed_Fib(n-k))":
+def twoFactorsFib "?msd_fib E k (k>=1) & (k<n) & $isClosedFactor_Fib(k,0) & $isClosedFactor_Fib(n-k,k)";
 
 ### 2.2 Fattorizzazione in 2 Parti - Thue-Morse
 
 # Definizione: esiste k tale che [0..k-1] e [k..n-1] sono entrambe chiuse?
-def twoFactors_TM "?msd_2 Ek (k >= 1 & k < n & $isClosed_TM(k) & $isClosed_TM(n-k))":
+def twoFactors_TM "E k (k>=1) & (k<n) & $isClosedFactor_TM(k,0) & $isClosedFactor_TM(n-k,k)";
 
 ### 2.3 Fattorizzazione in 3 Parti - Thue-Morse
 
 # Definizione: esistono k1, k2 tali che le 3 parti sono tutte chiuse?
-def threeFactors_TM "?msd_2 Ek1 Ek2 (k1 >= 1 & k2 > k1 & k2 < n & $isClosed_TM(k1) & $isClosed_TM(k2 - k1) & $isClosed_TM(n - k2))":
+def threeFactors_TM "E k1 E k2 (k1>=1) & (k2>k1) & (k2<n) & $isClosedFactor_TM(k1,0) & $isClosedFactor_TM(k2-k1,k1) & $isClosedFactor_TM(n-k2,k2)";
 
-## 3. PREDICATI DI NEGAZIONE
+## 3. TEOREMI (in teoria) DIMOSTRATI
 
-### 3.1 Prefisso NON Chiuso - Fibonacci
-
-# Il prefisso di lunghezza n NON è chiuso
-def notClosed_Fib "?msd_fib ~$isClosed_Fib(n)":
-
-### 3.2 Prefisso NON Chiuso - Thue-Morse
-
-# Il prefisso di lunghezza n NON è chiuso
-def notClosed_TM "?msd_2 ~$isClosed_TM(n)":
-
-### 3.3 NON 2-Fattorizzabile - Thue-Morse
-
-# NON esiste fattorizzazione in 2 parole chiuse
-def notTwoFactors_TM "?msd_2 ~Ek (k >= 1 & k < n & $isClosed_TM(k) & $isClosed_TM(n-k))":
-
-### 3.4 NON 3-Fattorizzabile - Thue-Morse
-
-# NON esiste fattorizzazione in 3 parole chiuse
-def notThreeFactors_TM "?msd_2 ~Ek1 Ek2 (k1 >= 1 & k2 > k1 & k2 < n & $isClosed_TM(k1) & $isClosed_TM(k2 - k1) & $isClosed_TM(n - k2))":
-
----
-
-## 4. TEOREMI DIMOSTRATI
-
-### 4.1 TEOREMA FIBONACCI: Fattorizzazione Minima ≤ 2
+### 3.1 TEOREMA FIBONACCI: Fattorizzazione Minima ≤ 2
 
 # TEOREMA: Per ogni n >= 1, il prefisso di Fibonacci è chiuso OPPURE 2-fattorizzabile
 eval fibMaxTwo "?msd_fib An (n >= 1) => ($isClosed_Fib(n) | $twoFactorsFib(n))":
@@ -69,24 +41,24 @@ eval tmMaxThree "?msd_2 An (n >= 1) => ($isClosed_TM(n) | $twoFactors_TM(n) | $t
 
 # RISULTATO: TRUE ✓
 
-## 5. VERIFICHE AUSILIARIE
+## 4. VERIFICHE AUSILIARIE
 
-### 5.1 Fibonacci: 2 Fattori Sempre Sufficienti per n ≥ 7
+### 4.1 Fibonacci: 2 Fattori Sempre Sufficienti per n ≥ 7
 
 eval fibAlwaysTwoFactors "?msd_fib An (n >= 7) => $twoFactorsFib(n)":
 # RISULTATO: TRUE ✓
 
-### 5.2 Thue-Morse: 3 Fattori Sempre Sufficienti per n ≥ 10
+### 4.2 Thue-Morse: 3 Fattori Sempre Sufficienti per n ≥ 10
 
 eval tmAlwaysThreeFactors "?msd_2 An (n >= 10) => $threeFactors_TM(n)":
 # RISULTATO: TRUE ✓
 
-### 5.3 Thue-Morse: Esistono Casi che Richiedono 3 Fattori
+### 4.3 Thue-Morse: Esistono Casi che Richiedono 3 Fattori
 
 eval tmNeedsThree "?msd_2 En (n >= 10 & ~$twoFactors_TM(n))":
 # RISULTATO: TRUE ✓
 
-### 5.4 Esistenza di Prefissi Chiusi
+### 4.4 Esistenza di Prefissi Chiusi
 
 # Fibonacci: esistono prefissi chiusi per n >= 7?
 eval fibNeverOneFactor "?msd_fib An (n >= 7) => ~$isClosed_Fib(n)":
