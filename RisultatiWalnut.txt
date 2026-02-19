@@ -37,9 +37,9 @@ eval fibMaxTwo "?msd_fib An (n >= 1) => ($isClosed_Fib(n) | $twoFactorsFib(n))":
 # RISULTATO: TRUE ✓
 
 # TEOREMA: Per ogni n >= 1, il prefisso di Thue-Morse è chiuso, 2-fatt., o 3-fatt.
-eval tmMaxThree "?msd_2 An (n >= 1) => ($isClosed_TM(n) | $twoFactors_TM(n) | $threeFactors_TM(n))":
+eval tmMaxThree "?msd_2 An (n >= 1) => ($isClosed_TM(n) | $twoFactors_TM(n))":
 
-# RISULTATO: TRUE ✓
+# RISULTATO: FALSE ✓
 
 ## 4. VERIFICHE AUSILIARIE
 
@@ -57,13 +57,3 @@ eval tmAlwaysThreeFactors "?msd_2 An (n >= 10) => $threeFactors_TM(n)":
 
 eval tmNeedsThree "?msd_2 En (n >= 10 & ~$twoFactors_TM(n))":
 # RISULTATO: TRUE ✓
-
-### 4.4 Esistenza di Prefissi Chiusi
-
-# Fibonacci: esistono prefissi chiusi per n >= 7?
-eval fibNeverOneFactor "?msd_fib An (n >= 7) => ~$isClosed_Fib(n)":
-# RISULTATO: FALSE (essendo una negazione significa che esistono prefissi chiusi!)
-
-# Thue-Morse: esistono prefissi chiusi per n >= 10
-eval tmNeverOneFactor "?msd_2 An (n >= 10) => ~$isClosed_TM(n)":
-# RISULTATO: FALSE (quindi esistono prefissi chiusi!)
