@@ -40,3 +40,27 @@ eval fibMaxTwo "?msd_fib An (n >= 1) => ($isClosed_Fib(n) | $twoFactorsFib(n))":
 eval tmMaxThree "?msd_2 An (n >= 1) => ($isClosed_TM(n) | $twoFactors_TM(n))":
 
 # RISULTATO: FALSE ✓
+
+## 4. FATTORI GENERICI
+
+### 4.1 PREDICATI GENERICI PER FIBONACCI E THUE-MORSE
+
+def twoFactorsFib_generic "?msd_fib E k (k>=1) & (k<n) & $isClosedFactor_Fib(k,i) & $isClosedFactor_Fib(n-k,i+k)";
+
+def twoFactors_TM_generic "E k (k>=1) & (k<n) & $isClosedFactor_TM(k,i) & $isClosedFactor_TM(n-k,i+k)";
+
+def threeFactors_TM_generic "E k1 E k2 (k1>=1) & (k2>k1) & (k2<n) & $isClosedFactor_TM(k1,i) & $isClosedFactor_TM(k2-k1,i+k1) & $isClosedFactor_TM(n-k2,i+k2)";
+
+eval fibMaxTwo_generic "?msd_fib A i A n ((n>=1) & (n<1000) & (i>=0) & (i+n<1050)) => ($isClosedFactor_Fib(n,i) | $twoFactorsFib_generic(i,n))";
+
+# RISULTATO: TRUE ✓
+
+eval tmMaxTwo_generic "A i A n ((n>=1) & (n<1000) & (i>=0) & (i+n<1050)) => ($isClosedFactor_TM(n,i) | $twoFactors_TM_generic(i,n))";
+
+# RISULTATO: FALSE ✓
+
+Di conseguenza Thue-Morse ha sempre bisogno di 3 fattorizzazioni minime:
+
+eval tmMaxThree_generic "A i A n ((n>=1) & (n<1000) & (i>=0) & (i+n<1050)) => ($isClosedFactor_TM(n,i) | $twoFactors_TM_generic(i,n) | $threeFactors_TM_generic(i,n))";
+
+# RISULTATO: TRUE ✓
